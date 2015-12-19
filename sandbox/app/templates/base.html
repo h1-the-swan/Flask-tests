@@ -1,0 +1,14 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	{% if title %}
+	<title>{{ title }} - Flask sandbox</title>
+	{% else %}
+	<title>Flask sandbox</title>
+	{% endif %}
+	
+</head>
+<body>
+	{% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Text Entry</h1>
+<form action="" method="post" name="TextEntry">
+	{{ form.hidden_tag() }}
+	<p>
+		Enter text:<br>
+		{{ form.text(rows=50, cols=200) }}<br>
+	</p>
+	<p><input type="submit" value="Continue →"></p>
+</form>
+{% endblock %}
+
