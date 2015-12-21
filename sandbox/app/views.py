@@ -13,7 +13,9 @@ def index():
 def TextEntry():
     form = TextEntryForm()
     if form.validate_on_submit():
+        print("Dumping to file")
         dump_to_file(form.text.data)
+        return redirect('/index')
     return render_template('TextEntry.html',
                            title='TextEntry',
                            form=form)
