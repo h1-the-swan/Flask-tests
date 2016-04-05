@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.mail import Mail
 
 import os
 from flask.ext.login import LoginManager
@@ -34,6 +35,8 @@ if not app.debug:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.info('microblog startup')
+
+mail = Mail(app)
 
 
 from app import views, models

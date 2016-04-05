@@ -5,6 +5,7 @@ from forms import LoginForm, EditForm, PostForm, SearchForm
 from models import User, Post
 from datetime import datetime
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS
+from .emails import follower_notification
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -67,7 +68,7 @@ def after_login(resp):
         nickname = resp.nickname
         if nickname is None or nickname == "":
             nickname = resp.email.split('@')[0]
-        nickname = User.make_uniquer_nickname[nickname]
+        nickname = User.make_unique_nickname[nickname]
         user = User(nickname=nickname, email=resp.email)
         db.session.add(user)
         db.session.commit()
@@ -136,6 +137,7 @@ def follow(nickname):
     db.session.add(u)
     db.session.commit()
     flash('You are now following ' + nickname + '!')
+    follower_notification(user, g.user)
     return redirect(url_for('user', nickname=nickname))
 
 @app.route('/unfollow/<nickname>')
